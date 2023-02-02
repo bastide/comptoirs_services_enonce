@@ -15,7 +15,7 @@ public class CommandeService {
     // La couche "Service" utilise la couche "Accès aux données" pour effectuer les traitements
     private final CommandeRepository commandeDao;
     private final ClientRepository clientDao;
-    
+
 
     // @Autowired
     // La couche "Service" utilise la couche "Accès aux données" pour effectuer les traitements
@@ -66,17 +66,7 @@ public class CommandeService {
      */
     @Transactional
     public Commande enregistreExpédition(Integer commandeNum) {
-        //La commande doit exister
-        var commande = commandeDao.findById(commandeNum).orElseThrow();
-        //La commande ne doit pas être déjà envoyée
-        if (commande.getEnvoyeele() != null) {
-            throw new IllegalStateException("Commande déjà expédiée");
-        }
-        commande.setEnvoyeele(LocalDate.now());
-        for (var ligne : commande.getLignes()) {
-            var produit = ligne.getProduit();
-            produit.setUnitesEnStock(produit.getUnitesEnStock() - ligne.getQuantite());
-        }
-        return commande;
+        // TODO : implémenter cette méthode
+        throw new UnsupportedOperationException("Cette méthode n'est pas implémentée");
     }
 }

@@ -27,7 +27,7 @@ public class LigneService {
 
     /**
      * <pre>
-     * Service métier : 
+     * Service métier :
      *     Enregistre une nouvelle ligne de commande pour une commande connue par sa clé,
      *     Incrémente la quantité totale commandée (Produit.unitesCommandees) avec la quantite à commander
      * Règles métier :
@@ -37,7 +37,7 @@ public class LigneService {
      *     - la quantité doit être positive
      *     - On doit avoir une quantité en stock du produit suffisante (produit.unitesEnStock)
      * <pre>
-     * 
+     *
      *  @param commandeNum la clé de la commande
      *  @param produitRef la clé du produit
      *  @param quantite la quantité commandée (positive)
@@ -45,6 +45,7 @@ public class LigneService {
      */
     @Transactional
     Ligne ajouterLigne(Integer commandeNum, Integer produitRef, @Positive int quantite) {
+        // TODO : implémenter cette méthode
         throw new UnsupportedOperationException("Cette méthode n'est pas implémentée");
     }
 }
