@@ -31,11 +31,11 @@ public class LigneService {
      *     Enregistre une nouvelle ligne de commande pour une commande connue par sa clé,
      *     Incrémente la quantité totale commandée (Produit.unitesCommandees) avec la quantite à commander
      * Règles métier :
-     *     - le produit référencé doit exister
+     *     - le produit référencé doit exister et être disponible (produit.indisponible = false)
      *     - la commande doit exister
      *     - la commande ne doit pas être déjà envoyée (le champ 'envoyeele' doit être null)
      *     - la quantité doit être positive
-     *     - On doit avoir une quantite en stock du produit suffisante
+     *     - On doit avoir une quantité en stock du produit suffisante (produit.unitesEnStock)
      * <pre>
      * 
      *  @param commandeNum la clé de la commande

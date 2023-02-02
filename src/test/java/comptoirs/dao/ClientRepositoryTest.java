@@ -41,7 +41,7 @@ class ClientRepositoryTest {
 		log.info("On supprime un client");	
 		// On vérifie qu'au début, on a deux commandes 
 		assertEquals(2, daoCommande.count(), "On doit trouver deux commandes");
-		// On cherche le client BONAP d'après sa clé
+		// On cherche le client 2COM d'après sa clé
 		Client c  = daoClient.findById("2COM").orElseThrow();
 		// On supprime le client
 		daoClient.delete(c);

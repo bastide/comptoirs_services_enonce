@@ -1,6 +1,7 @@
 package comptoirs.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import org.springframework.stereotype.Service;
 
@@ -60,10 +61,22 @@ public class CommandeService {
      *   de la quantité commandée
      * @param commandeNum la clé de la commande
      * @return la commande mise à jour
+     * @throws IllegalStateException si la commande est déjà expédiée
+     * @throws java.util.NoSuchElementException si la commande n'existe pas
      */
     @Transactional
     public Commande enregistreExpédition(Integer commandeNum) {
-        // TODO : implémenter ce service métier
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        //La commande doit exister
+        var commande = commandeDao.findById(commandeNum).orElseThrow();
+        //La commande ne doit pas être déjà envoyée
+        if (commande.getEnvoyeele() != null) {
+            throw new IllegalStateException("Commande déjà expédiée");
+        }
+        commande.setEnvoyeele(LocalDate.now());
+        for (var ligne : commande.getLignes()) {
+            var produit = ligne.getProduit();
+            produit.setUnitesEnStock(produit.getUnitesEnStock() - ligne.getQuantite());
+        }
+        return commande;
     }
 }
