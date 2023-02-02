@@ -79,8 +79,8 @@ class CommandeRepositoryTest {
 	void pasDeuxFoisLeMemeProduitDansUneCommande() {
 		log.info("Tentative de création d'une commande avec doublon");	
 		// On cherche les infos nécessaires dans le jeu d'essai
-		Produit p1 = daoProduit.findById(99).get();
-		Client c1  = daoClient.findById("0COM").get();
+		Produit p1 = daoProduit.findById(99).orElseThrow();
+		Client c1  = daoClient.findById("0COM").orElseThrow();
 
 		// On crée une commande
 		Commande nouvelle = new Commande();
@@ -109,7 +109,7 @@ class CommandeRepositoryTest {
 	void onPeutSupprimerDesLignesDansUneCommande() {
 		long nombreDeLignes = daoLigne.count(); // Combien de lignes en tout ?
 		log.info("Supression de lignes dans une commande");
-		Commande c = daoCommande.findById(99999).get(); // Cette commande a 2 lignes
+		Commande c = daoCommande.findById(99999).orElseThrow(); // Cette commande a 2 lignes
 		c.getLignes().remove(1); // On supprime la dernière ligne
 		daoCommande.save(c); // On l'enregistre (provoque la suppression de la ligne)
 		assertEquals(nombreDeLignes - 1, daoLigne.count(), "On doit avoir supprimé une ligne");
@@ -119,7 +119,7 @@ class CommandeRepositoryTest {
 	@Sql("small_data.sql")
 	void onPeutModifierDesLignesDansUneCommande() {
 		log.info("Modification des lignes d'une commande");
-		Commande c = daoCommande.findById(99999).get(); // Cette commande a 2 lignes
+		Commande c = daoCommande.findById(99999).orElseThrow(); // Cette commande a 2 lignes
 		Ligne l = c.getLignes().get(1); // On prend la deuxième
 		l.setQuantite(99);; // On la modifie
 		daoCommande.save(c); // On enregistre la commande (provoque la modification de la ligne)

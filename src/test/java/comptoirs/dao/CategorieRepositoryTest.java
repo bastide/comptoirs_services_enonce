@@ -76,7 +76,7 @@ class CategorieRepositoryTest {
 		// On s'assure qu'on trouvé le résultat
 		assertTrue(resultat.isPresent(), "Cette catégorie existe");
 		Categorie c = resultat.get();
-		assertEquals("2prods", c.getLibelle());
+		assertEquals("7prods", c.getLibelle());
 
 		log.info("Entité trouvée: {}", c);
 	}
@@ -113,9 +113,9 @@ class CategorieRepositoryTest {
 		log.info("Modifier une entité");
 
 		int codePresent = 98;
-		String ancienLibelle = "2prods";
+		String ancienLibelle = "7prods";
 		String nouveauLibelle = "Libellé modifié";
-		Categorie c = categoryDAO.findById(codePresent).get(); 
+		Categorie c = categoryDAO.findById(codePresent).orElseThrow();
 		assertEquals(ancienLibelle, c.getLibelle());
 		// On change l'entité
 		c.setLibelle(nouveauLibelle);
@@ -149,8 +149,8 @@ class CategorieRepositoryTest {
 	void onNePeutPasDetruireUneCategorieQuiADesProduits() {
 		log.info("Détruire une catégorie avec des produits");
 		int codeCategorieAvecDesProduits = 98;
-		Categorie c = categoryDAO.findById(codeCategorieAvecDesProduits).get();
-		assertEquals("2prods", c.getLibelle());
+		Categorie c = categoryDAO.findById(codeCategorieAvecDesProduits).orElseThrow();
+		assertEquals("7prods", c.getLibelle());
 		// Il y a des produits dans la catégorie 'Boissons'
 		assertFalse(c.getProduits().isEmpty());
 		// Si on essaie de détruire cette catégorie, on doit avoir une exception
