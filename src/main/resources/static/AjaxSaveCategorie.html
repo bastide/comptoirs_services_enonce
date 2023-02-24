@@ -52,8 +52,11 @@
             console.log("Données envoyées : %o", categorieASauvegarder);
             const options = {
                 method: "POST",
-                headers: { // On indique qu'on envoie du JSON
-                    "Content-Type": "application/json"
+                headers: {
+                    // On indique qu'on envoie du JSON
+                    "Content-Type": "application/json",
+                    // On indique qu'on veut du JSON en réponse
+                    "accept": "application/json",
                 },
                 // On envoie les données au format JSON
                 // dans le corps de la requête
