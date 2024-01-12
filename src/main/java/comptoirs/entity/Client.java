@@ -35,13 +35,16 @@ public class Client {
 
     @Size(max = 30)
     @Column(length = 30)
+    @ToString.Exclude
     private String fonction;
 
-    @Embedded
+    @Embedded // AdressePostale est une classe "embarquée" dans Client
+    @ToString.Exclude
     private AdressePostale adresse;
 
     @Size(max = 24)
     @Column(length = 24)
+    @ToString.Exclude
     private String telephone;
 
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$",
@@ -50,8 +53,10 @@ public class Client {
     // validation
     @Size(max = 24)
     @Column(length = 24)
+    @ToString.Exclude
     private String fax;
 
+    // Si on supprime un client, on supprime aussi ses commandes
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     @ToString.Exclude
     private List<Commande> commandes = new ArrayList<>();

@@ -1,4 +1,4 @@
-package comptoirs.dto;
+package comptoirs.dao;
 
 /**
  * Une "projection" de l'entité Produit.

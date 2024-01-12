@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.1</version>
+		<version>3.2.1</version>
 		<relativePath />
 		<!-- lookup parent from repository -->
 	</parent>
@@ -23,21 +23,14 @@
 	</properties>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
 		<dependency>
 			<!-- JPA -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<!-- Le moteur de template Thymeleaf -->
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<dependency>
 			<!-- Spring MVC -->
@@ -48,11 +41,6 @@
 			<!-- Web services REST -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
-		</dependency>
-		<dependency>
-			<!-- Gestion des sessions -->
-			<groupId>org.springframework.session</groupId>
-			<artifactId>spring-session-core</artifactId>
 		</dependency>
 		<!-- Le browser d'API swagger -->
 		<dependency>
@@ -89,25 +77,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- Pour produire du XML -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.module</groupId>
-			<artifactId>jackson-module-jaxb-annotations</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-hibernate5</artifactId>
-		</dependency>
 		<!-- Lombok pour générer automatiquement les getter / setter...  -->
 		<!-- cf. https://examples.javacodegeeks.com/spring-boot-with-lombok/ -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.24</version>
+			<version>1.18.30</version>
 		</dependency>
         <!-- ModelMapper pour les DTO  -->
         <dependency>
