@@ -36,7 +36,7 @@ class CategorieRepositoryTest {
 		assertFalse(liste.isEmpty(), "Il y a des catégories dans le jeu de test");
 		log.info("Liste des entités: {}", liste);
 	}
-	
+
 	@Test
 	void listerCustomQuery() {
 		log.info("Chercher des entités avec une requête 'custom' Spring");
@@ -45,9 +45,9 @@ class CategorieRepositoryTest {
 		log.info("Entités trouvées: {}", liste);
 		assertEquals(2, liste.size(), "Il y a deux catégories dont le libellé contient la sous-chaine");
 		substring = "xx";
-		assertTrue(categoryDAO.findByLibelleContaining(substring).isEmpty(), "Aucun libellé de catégorie ne contient cette sous-chaine"); 	
+		assertTrue(categoryDAO.findByLibelleContaining(substring).isEmpty(), "Aucun libellé de catégorie ne contient cette sous-chaine");
 	}
-	
+
 	@Test
 	void touverParCle()  {
 		log.info("Trouver une entité par sa clé");
@@ -103,7 +103,7 @@ class CategorieRepositoryTest {
 		log.info("Créer une entité avec erreur");
 		Categorie nouvelle = new Categorie();
 		String libelleQuiExiste = "0prod"; // Ce libellé existe dans le jeu de test
-		nouvelle.setLibelle(libelleQuiExiste);  
+		nouvelle.setLibelle(libelleQuiExiste);
 		nouvelle.setDescription("essai");
 		try { // L'enregistrement peut générer des exceptions (ex : violation de contrainte d'intégrité)
 			categoryDAO.save(nouvelle);
@@ -124,9 +124,9 @@ class CategorieRepositoryTest {
 		assertFalse(c.getProduits().isEmpty());
 		// Si on essaie de détruire cette catégorie, on doit avoir une exception
 		// de violation de contrainte d'intégrité
+		categoryDAO.delete(c);
 		assertThrows(DataIntegrityViolationException.class, () -> {
-			categoryDAO.delete(c);
-			categoryDAO.flush();
+			categoryDAO.flush(); // flush force la fin de la transaction et la validation des contraintes
 		});
 	}
 }

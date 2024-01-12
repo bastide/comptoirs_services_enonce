@@ -1,9 +1,9 @@
-package comptoirs.dto;
+package comptoirs.dao;
 
 /**
  * Un "DTO" auto-implémenté par Spring
  */
-public interface UnitesParProduit {
+public interface UnitesParProduitProjection {
 	String getNom();
 	Long getUnites();
 }

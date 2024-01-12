@@ -1,6 +1,8 @@
 package comptoirs.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
 import lombok.*;
@@ -34,9 +36,9 @@ public class Commande {
 	@ToString.Exclude
 	private LocalDate envoyeele = null;
 
-	// @Max(value=?) @Min(value=?)//if you know range of your decimal fields
-	// consider using these annotations to enforce field validation
+    // BigDecimal est la classe Java recommandée pour les montants monétaires
 	@Column(precision = 18, scale = 2)
+    @Min(value = 0, message = "Le port ne peut pas être négatif")
 	@ToString.Exclude
 	private BigDecimal port = BigDecimal.ZERO;
 
@@ -44,19 +46,22 @@ public class Commande {
 	@Column(length = 40)
 	private String destinataire;
 
-	@Embedded
+	@Embedded // AdressePostale est une classe "embarquée" dans Commande
 	private AdressePostale adresseLivraison;
 
 	@Basic(optional = false)
-	@NonNull
 	@Column(nullable = false, precision = 10, scale = 2)
+    @Min(value = 0, message = "La remise (%) ne peut pas être négative")
+    @Max(value = 1, message = "La remise (%) ne peut pas être supérieure à 1")
 	private BigDecimal remise = BigDecimal.ZERO;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "commande", orphanRemoval = true)
-	private List<Ligne> lignes = new LinkedList<>();
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "commande", orphanRemoval = true)
+	@ToString.Exclude
+    private List<Ligne> lignes = new LinkedList<>();
 
 	@ManyToOne(optional = false)
 	@NonNull
+    @ToString.Exclude
 	private Client client;
 
 }

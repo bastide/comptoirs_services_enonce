@@ -1,12 +1,13 @@
 package comptoirs.entity;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
 @Table(uniqueConstraints = {
+    // Une commande ne peut pas contenir deux fois le même produit
 	@UniqueConstraint(columnNames = {"COMMANDE_NUMERO", "PRODUIT_REFERENCE"})
 })
 public class Ligne {
@@ -30,6 +31,7 @@ public class Ligne {
 	@Basic(optional = false)
 	@Column(nullable = false)
 	@NonNull
+    @PositiveOrZero(message = "La quantité ne peut pas être négative")
 	private Integer quantite;
 
 }
