@@ -53,8 +53,7 @@ public class CommandeService {
         var nouvelleCommande = new Commande(client);
         // On initialise l'adresse de livraison avec l'adresse du client
         nouvelleCommande.setAdresseLivraison(client.getAdresse());
-        // Si le client a déjà commandé plus de 100 articles, on lui offre une remise de
-        // 15%
+        // Si le client a déjà commandé plus de 100 articles, on lui offre une remise de 15%
         // La requête SQL nécessaire est définie dans l'interface ClientRepository
         var nbArticles = clientDao.nombreArticlesCommandesPar(clientCode);
         if (nbArticles > 100) {
@@ -88,31 +87,8 @@ public class CommandeService {
      */
     @Transactional
     public Ligne ajouterLigne(int commandeNum, int produitRef, @Positive int quantite) {
-        // On vérifie que le produit existe
-        var produit = produitDao.findById(produitRef).orElseThrow();
-        // On  vérifie que le produit n'est pas marqué indisponible
-        if (produit.isIndisponible()) {
-            throw new IllegalStateException("Produit indisponible");
-        }
-        // On vérifie qu'il y a assez de stock
-        if (produit.getUnitesEnStock() < quantite + produit.getUnitesCommandees()) {
-            throw new IllegalStateException("Pas assez de stock");
-        }
-        // On vérifie que la commande existe
-        var commande = commandeDao.findById(commandeNum).orElseThrow();
-        // On vérifie que la commande n'est pas déjà envoyée
-        if (commande.getEnvoyeele() != null) {
-            throw new IllegalStateException("Commande déjà envoyée");
-        }
-        // On crée une ligne de commande pour cette commande
-        var nouvelleLigne = new Ligne(commande, produit, quantite);
-        // On enregistre la ligne de commande (génère la clé)
-        ligneDao.save(nouvelleLigne);
-        // On incrémente la quantité commandée
-        produit.setUnitesCommandees(produit.getUnitesCommandees() + quantite);
-        // Inutile de sauvegarder le produit, les entités modifiées par une transaction
-        // sont automatiquement sauvegardées à la fin de la transaction
-        return nouvelleLigne;
+        // TODO : implémenter cette méthode
+        throw new UnsupportedOperationException("Pas encore implémenté");
     }
 
     /**
@@ -131,18 +107,7 @@ public class CommandeService {
      */
     @Transactional
     public Commande enregistreExpedition(int commandeNum) {
-        var commande = commandeDao.findById(commandeNum).orElseThrow();
-        if (commande.getEnvoyeele() != null) {
-            throw new IllegalStateException("Commande déjà envoyée");
-        }
-        commande.setEnvoyeele(LocalDate.now());
-        commande.getLignes().forEach(ligne -> {
-            var produit = ligne.getProduit();
-            // Les produits de la commande ne sont plus en stock
-            produit.setUnitesEnStock(produit.getUnitesEnStock() - ligne.getQuantite());
-            // Les produits de la commande ne sont plus "en commande"
-            produit.setUnitesCommandees(produit.getUnitesCommandees() - ligne.getQuantite());
-        });
-        return commande;
+        // TODO : implémenter cette méthode
+        throw new UnsupportedOperationException("Pas encore implémenté");
     }
 }

@@ -46,6 +46,7 @@ public class Produit {
 	private int niveauDeReappro = 0;
 
 	// 0 = FALSE
+    // note : le getter généré par lombok s'appelle isIndisponible()
 	private boolean indisponible = false;
 
 	@ManyToOne(optional = false)
