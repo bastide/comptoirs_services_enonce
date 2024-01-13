@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 
 import comptoirs.dao.ProduitRepository;
+import jakarta.validation.ConstraintViolationException;
 
 
 @SpringBootTest
@@ -44,7 +44,7 @@ class AjoutLigneTest {
 
     @Test
     void laQuantiteEstPositive() {
-        assertThrows(DataIntegrityViolationException.class,
+        assertThrows(ConstraintViolationException.class,
             () -> service.ajouterLigne(NUMERO_COMMANDE_PAS_LIVREE, REFERENCE_PRODUIT_DISPONIBLE_1, 0),
             "La quantite d'une ligne doit être positive");
     }
