@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.transaction.annotation.Transactional;
 
 import comptoirs.dao.ClientRepository;
 import comptoirs.dao.CommandeRepository;
@@ -12,10 +14,13 @@ import comptoirs.dao.LigneRepository;
 import comptoirs.dao.ProduitRepository;
 import comptoirs.entity.Commande;
 import comptoirs.entity.Ligne;
-import jakarta.transaction.Transactional;
+
+
 import jakarta.validation.constraints.Positive;
 
 @Service
+@Validated // Les annotations de validation sont actives sur les méthodes de ce service
+// (ex: @Positive)
 public class CommandeService {
     // La couche "Service" utilise la couche "Accès aux données" pour effectuer les
     // traitements
