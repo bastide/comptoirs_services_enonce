@@ -1,6 +1,9 @@
 # Conception et test d'un "Service métier"
 
-On se propose de développer le service métier permettant de gérer les commandes pour un site de vente en ligne. Les spécifications précises du service à développer sont explicitées dans le javadoc des méthodes de la classe [CommandeService](./src/main/java/comptoirs/service/CommandeService.java). Les [tests unitaires](./src/test/java/comptoirs/service) fournis vérifient que les règles métier sont bien respectées.
+On se propose de développer le service métier permettant de gérer les commandes pour un site de vente
+en ligne.
+Les spécifications précises du service à développer sont explicitées dans le javadoc des méthodes
+de la classe [CommandeService](./src/main/java/comptoirs/service/CommandeService.java). Les [tests unitaires](./src/test/java/comptoirs/service) fournis vérifient que les règles métier sont bien respectées.
 
 ## Modèle conceptuel de données
 
@@ -16,4 +19,5 @@ Notes :
 
 ## TODO
 
-Implementer les méhodes de la classe `CommandeService` de manière à ce que les tests unitaires passent tous.
+1. dans [`ClientRepository`](./src/main/java/comptoirs/dao/ClientRepository.java), trouver la requête qui calcule le nombre d'articles commandés pour un client dont le code est passé en paramètre.
+2. Implementer les méthodes de la classe [`CommandeService`](./src/main/java/comptoirs/service/CommandeService.java) de manière à ce que les tests unitaires passent tous.

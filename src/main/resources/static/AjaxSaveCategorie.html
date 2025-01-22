@@ -19,11 +19,13 @@
         function showResult(resultJson) {
             // cf. https://developer.mozilla.org/en-US/docs/Web/API/console#outputting_text_to_the_console
             console.log("Réponse de l'API : %o", resultJson);
+            alert("Catégorie enregistrée avec succès");
         }
 
         // Afficher les erreurs quand l'API a signalé une erreur
         function showError(error) {
             console.error("L'API signale l'erreur %o", error);
+            alert("Erreur de l'API : " + error.message);
         }
 
         /**
@@ -62,12 +64,8 @@
                 // dans le corps de la requête
                 body: JSON.stringify(categorieASauvegarder)
             };
-            fetch("api/categories", options)
-                // Si pas d'erreur réseau, on convertit le json reçu en objet javascript
-                .then(response => response.json())
-                // On affiche le résultat (même s'il y a eu une erreur de l'API)
+            doAjaxRequest("api/categories", options)
                 .then(showResult)
-                // en cas d'erreur réseau
                 .catch(showError);
         }
     </script>

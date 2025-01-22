@@ -24,14 +24,14 @@ class ProduitRepositoryTest {
 		log.info("Calcul des statistiques");
 		int categorieAvecProduit = 98;
 		int categorieSansProduit = 99;
-		List<UnitesParProduitProjection> results  = daoProduit.produitsVendusPour(categorieSansProduit);
+		var results  = daoProduit.produitsVendusJPQL(categorieSansProduit);
 		assertEquals(0, results.size(),
 			"La catégorie 99 n'a pas de produit dans le jeu de test");
 
-		results = daoProduit.produitsVendusPour(categorieAvecProduit);
+		results = daoProduit.produitsVendusJPQL(categorieAvecProduit);
 		assertEquals(2, results.size(),
 			"La catégorie 98 a deux produits différents vendus dans le jeu de test");
-		assertEquals(70, results.get(1).getUnites(), "On a vendu 70 unités du produit dans le jeu de test");
+		assertEquals(70, results.get(1).getUnitesCommandees(), "On a vendu 70 unités du produit dans le jeu de test");
 	}
 
 	@Test
