@@ -21,8 +21,7 @@ import jakarta.validation.constraints.Positive;
 @Validated // Les annotations de validation sont actives sur les méthodes de ce service
 // (ex: @Positive)
 public class CommandeService {
-    // La couche "Service" utilise la couche "Accès aux données" pour effectuer les
-    // traitements
+    // La couche "Service" utilise la couche "Accès aux données" pour effectuer les traitements
     private final CommandeRepository commandeDao;
     private final ClientRepository clientDao;
     private final LigneRepository ligneDao;
@@ -56,8 +55,7 @@ public class CommandeService {
         var nouvelleCommande = new Commande(client);
         // On initialise l'adresse de livraison avec l'adresse du client
         nouvelleCommande.setAdresseLivraison(client.getAdresse());
-        // Si le client a déjà commandé plus de 100 articles, on lui offre une remise de
-        // 15%
+        // Si le client a déjà commandé plus de 100 articles, on lui offre une remise de 15%
         // La requête SQL nécessaire est définie dans l'interface ClientRepository
         var nbArticles = clientDao.nombreArticlesCommandesPar(clientCode);
         if (nbArticles > 100) {

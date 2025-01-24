@@ -59,11 +59,11 @@ class AjoutLigneTest {
     @Test
     void ilFautAssezDeStock() {
         var produit = daoProduit.findById(REFERENCE_PRODUIT_DISPONIBLE_4).orElseThrow();
-        var stock = produit.getUnitesEnStock();
+        var enStock = produit.getUnitesEnStock();
         var enCommande = produit.getUnitesCommandees();
-        int quantiteMaximumCommandable = stock - enCommande;
+        int quantiteMaximumCommandable = enStock - enCommande;
         assertThrows(IllegalStateException.class,
             () -> service.ajouterLigne(NUMERO_COMMANDE_PAS_LIVREE, REFERENCE_PRODUIT_DISPONIBLE_4, quantiteMaximumCommandable + 1),
-            "La quantité commandée ne doit pas dépasser le stock disponible");
+            "La quantité commandée ne doit pas dépasser le enStock disponible");
     }
 }

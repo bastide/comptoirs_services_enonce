@@ -25,7 +25,7 @@ public interface CommandeRepository extends JpaRepository<Commande, Integer> {
     /**
      * Pour le client passé en paramètre, renvoie une liste de projections contenant le numéro de commande, sa date de saisie et son montant total
      * @param codeClient le code du client à traiter
-     * @return une liste de projections contenant le numéro de commande, sa date de saisie et son montant total
+     * @return une liste de projections contenant le numéro de commande, les frais de port, et son montant total
      */
     @Query("""
         SELECT  l.commande.numero as numeroCommande, l.commande.port as port,
