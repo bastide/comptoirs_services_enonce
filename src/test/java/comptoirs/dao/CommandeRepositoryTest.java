@@ -42,7 +42,7 @@ class CommandeRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        var client = clientDao.findById("0COM").orElseThrow();
+        var client = clientDao.findById("2COM").orElseThrow();
         var p1 = produitDao.findById(93).orElseThrow();
         var p2 = produitDao.findById(94).orElseThrow();
         // Une commande sans produits
@@ -187,4 +187,20 @@ class CommandeRepositoryTest {
 		assertEquals(nombreDeLignes, ligneDao.count(), "Le nombre de lignes n'a pas changé");
 	}
 
+    @Test
+    @Sql("small_data.sql")
+    void testCommandesPourClient_NoOrders_ReturnsEmptyList() {
+        var commandes = commandeDao.commandesPourClient("0COM"); // Client with no orders
+        assertTrue(commandes.isEmpty(), "The list of orders must be empty for a client with no orders");
+    }
+
+    @Test
+    @Sql("small_data.sql")
+    void testCommandesPourClient_WithOrders_ReturnsCorrectData() {
+        var commandes = commandeDao.commandesPourClient("2COM"); // Client with orders
+        int nombreCommandes = commandes.size();
+        var resumeCommandes = commandeDao.commandesPourClient("2COM");
+        assertEquals(nombreCommandes, resumeCommandes.size(), "Le nombre de lignes renvoyées est incorrect");
+
+    }
 }
