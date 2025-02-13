@@ -9,7 +9,7 @@ de la classe [CommandeService](./src/main/java/comptoirs/service/CommandeService
 Clonez le dépôt et naviguez dans le répertoire du projet :
 ```bash
 git clone https://github.com/bastide/comptoirs_services_enonce.git
-cd comptoirsSpringJPA
+cd comptoirs_services_enonce
 mvn clean spring-boot:run
 ```
 Ouvrir l'application web sur [http://localhost:8989](http://localhost:8989)
