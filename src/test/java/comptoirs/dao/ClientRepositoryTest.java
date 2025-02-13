@@ -51,4 +51,21 @@ class ClientRepositoryTest {
 		// On vérifie qu'il ne reste aucune ligne
 		assertEquals(0, daoLigne.count(), "Il ne doit rester aucune ligne");
 	}
+    @Test
+    @Sql("small_data.sql")
+    void testNombreArticlesCommandesParAvecCommandes() {
+        log.info("Test du calcul du nombre d'articles commandés pour un client avec des commandes");
+        // Vérifie que le client 2COM a commandé 121 articles
+        int nombreArticles = daoClient.nombreArticlesCommandesPar("2COM");
+        assertEquals(121, nombreArticles, "Le client 2COM doit avoir commandé 121 articles");
+    }
+
+    @Test
+    @Sql("small_data.sql")
+    void testNombreArticlesCommandesParSansCommandes() {
+        log.info("Test du calcul du nombre d'articles commandés pour un client sans commandes");
+        // Vérifie que le client 0COM n'a pas d'articles commandés
+        int nombreArticles = daoClient.nombreArticlesCommandesPar("0COM");
+        assertEquals(0, nombreArticles, "Le client 0COM ne doit avoir aucun article commandé");
+    }
 }
