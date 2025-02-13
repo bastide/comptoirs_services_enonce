@@ -5,6 +5,15 @@ en ligne.
 Les spécifications précises du service à développer sont explicitées dans le javadoc des méthodes
 de la classe [CommandeService](./src/main/java/comptoirs/service/CommandeService.java). Les [tests unitaires](./src/test/java/comptoirs/service) fournis vérifient que les règles métier sont bien respectées.
 
+## Installation
+Clonez le dépôt et naviguez dans le répertoire du projet :
+```bash
+git clone https://github.com/bastide/comptoirs_services_enonce.git
+cd comptoirsSpringJPA
+mvn clean spring-boot:run
+```
+Ouvrir l'application web sur [http://localhost:8989](http://localhost:8989)
+
 ## Modèle conceptuel de données
 
 L'application utlise une base de données relationnelle dont le modèle conceptuel est le suivant :
